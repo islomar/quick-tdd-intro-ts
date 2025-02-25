@@ -15,6 +15,12 @@ describe("Hangmang machine", () => {
         expect(game.isOver()).toBe(true)
     })
 
+    it.skip("keeps playing the game whilst there are trials left", () => {
+        let game = startGame("p", 5)
+        game = game.tryTo(Guess.letter('a'))
+        expect(game.isOver()).toBe(false)
+    })
+
     it.skip("finishes the game when the player guesses the secret word", () => {
         let game = startGame("p", 5)
         game = game.tryTo(Guess.letter('p'))
@@ -37,7 +43,6 @@ describe("Hangmang machine", () => {
         let game = startGame("p", 5)
         game = game.tryTo(Guess.letter('a'))
         expect(game.result()).toEqual(GameResult.Ongoing)
-        expect(game.isOver()).toBe(false)
     })
 
     it.skip("counts the number of trials available", () => {
