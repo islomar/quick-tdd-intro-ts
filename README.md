@@ -13,7 +13,8 @@ You probably want to disable Copilot or any other AI plugin to be able to practi
 * Write the minium implementation the fastest one to make it green. 
 * Run the test to see it pass.
 * See if you want to refactoring a bit.
-* Go for the next test and keep going. 
+* Go for the next test and keep going. If you enable a test, run it and it's green, that could mean that you wrote too much code fo the previous test. Go back one step, delete code and try a more simple implementation. Each new test should turn red, not green, until you explicitely write enough code to make it green.
+* You could write a commit after each green test to track your progress.  
 
 
 ## Setup
