@@ -1,0 +1,27 @@
+{
+  "name": "quick-intro-tdd-ts",
+  "version": "0.0.1",
+  "description": "Quick Introduction to Test-Driven Development in TypeScript",
+  "main": "dist/index.js",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest run --coverage",
+    "ensure": "npm run type-check && npm run lint && npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lean-mind/quick-tdd-intro-ts.git"
+  },
+  "keywords": [],
+  "author": "Lean Mind <contact@leanmind.es>",
+  "license": "UNLICENSED",
+  "homepage": "https://github.com/lean-mind/quick-tdd-intro-ts.git#readme",
+  "devDependencies": {
+    "@vitest/coverage-v8": "^2.1.8",
+    "typescript": "~5.7.3",
+    "vite": "^6.0.7",
+    "vitest": "^2.1.8"
+  }
+}
