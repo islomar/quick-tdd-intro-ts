@@ -1,4 +1,4 @@
-export interface GameOptions {
+interface GameOptions {
     secretWord: string
     trials: number
 }
@@ -6,13 +6,14 @@ export interface GameOptions {
 export class Hangmang {
     static startGame({secretWord, trials}: GameOptions) : Game {
         if (trials <= 0) {
-            return new MisconfiguredGame(secretWord, trials)
+            return new InvalidTrialsGame(secretWord, trials)
         }       
-        if (secretWord.length < 3) {
-            return new MisconfiguredGame(secretWord, trials)
+        if (secretWord.length < this.miniumWordLength) {
+            return new InvalidSecretWordGame(secretWord, trials)
         }
         return new Game(secretWord, trials)
     }
+    static miniumWordLength = 1
 }
 
 export class Guess {
@@ -55,7 +56,7 @@ export class Guess {
     }
 }
 
-export class Game {
+class Game {
     constructor(
         protected secretWord: string, 
         protected trials: number, 
@@ -140,7 +141,7 @@ export class Game {
     }
 }
 
-export class MisconfiguredGame extends Game {
+abstract class MisconfiguredGame extends Game {
     override result(): GameResult {
         return GameResult.PlayerLoses
     }
@@ -156,19 +157,21 @@ export class MisconfiguredGame extends Game {
     override isMisconfigured(): boolean {
         return true
     }
+}
 
+class InvalidSecretWordGame extends MisconfiguredGame { 
     override problem(): GameError {
-        if (this.secretWord.length < 3) {
-            return GameError.SecretWordMustHaveThreeLetters
-        }
-        if (this.trials <= 0) { 
-            return GameError.TrialsMustBePositive
-        }
-        return GameError.None
+        return GameError.SecretWordMustHaveAtLeastOneLetter
     }
 }
 
-export class WrongGuessGame  extends Game {
+class InvalidTrialsGame extends MisconfiguredGame {
+    override problem(): GameError {
+        return GameError.TrialsMustBePositive
+    }
+}
+
+class WrongGuessGame  extends Game {
     constructor(
         secretWord: string,
         trials: number,
@@ -191,7 +194,7 @@ export enum GameResult {
 export enum GameError {
     None,
     TrialsMustBePositive,
-    SecretWordMustHaveThreeLetters,
+    SecretWordMustHaveAtLeastOneLetter,
     MultipleLettersNotAllowed,
     InvalidCharacter
 }

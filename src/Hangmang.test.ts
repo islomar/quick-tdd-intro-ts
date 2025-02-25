@@ -15,6 +15,12 @@ describe("Hangmang machine", () => {
         expect(game.isOver()).toBe(true)
     })
 
+    it("keeps playing the game whilst there are trials left", () => {
+        let game = startGame("p", 5)
+        game = game.tryTo(Guess.letter('a'))
+        expect(game.isOver()).toBe(false)
+    })
+
     it("finishes the game when the player guesses the secret word", () => {
         let game = startGame("p", 5)
         game = game.tryTo(Guess.letter('p'))
@@ -61,9 +67,9 @@ describe("Hangmang machine", () => {
         expect(game.revealedSecret()).toEqual("___")
         expect(game.availableTrials()).toEqual(0)
 
-        game = startGame("f", 15)
+        game = startGame("", 15)
         expect(game.isOver()).toBe(true)
-        expect(game.problem()).toBe(Misconfiguration.SecretWordMustHaveThreeLetters)
+        expect(game.problem()).toBe(Misconfiguration.SecretWordMustHaveAtLeastOneLetter)
     })
 
     it("does not alter a game that is already over", () => {
