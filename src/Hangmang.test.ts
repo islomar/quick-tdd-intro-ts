@@ -66,9 +66,9 @@ describe("Hangmang machine", () => {
         expect(game.revealedSecret()).toEqual("___")
         expect(game.availableTrials()).toEqual(0)
 
-        game = startGame("f", 15)
+        game = startGame("", 15)
         expect(game.isOver()).toBe(true)
-        expect(game.problem()).toBe(Misconfiguration.SecretWordMustHaveThreeLetters)
+        expect(game.problem()).toBe(Misconfiguration.SecretWordMustHaveAtLeastOneLetter)
     })
 
     it.skip("does not alter a game that is already over", () => {
