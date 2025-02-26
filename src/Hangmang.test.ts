@@ -1,12 +1,12 @@
 
 import { describe, it, expect} from "vitest";
-//import { GameError, GameResult, Guess, Hangmang } from "./Hangman";
+//import { GameError, GameResult, Guess, Hangman } from "./Hangman";
 
 
 describe("Hangmang machine", () => {
 
     function startGame(secretWord: string, trials: number) {
-        return Hangmang.startGame({secretWord, trials})
+        return Hangman.startGame({secretWord, trials})
     }
 
     it.skip("finishes the game when all trials are consumed", () => {
