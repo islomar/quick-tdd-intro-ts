@@ -13,8 +13,13 @@ You probably want to disable Copilot or any other AI plugin to be able to practi
 * Write the minimum implementation, the fastest one to make it green.
 * Run the test to see it pass.
 * See if you want to refactor a bit.
-* Go for the next test and keep going. If you enable a test, run it, and it's green, that could mean that you wrote too much code for the previous test. Go back one step, delete code, and try a simpler implementation. Each new test should turn red, not green, until you explicitly write enough code to make it green.
+* Go for the next test and keep going. If you enable a test, run it, and it's green, that could mean that you wrote too much code for the previous test. On the other hand, it could be that your implementation is enough but slightly different - maybe it's all right. 
+* Take a moment to think if you wrote more code than strictly necessary. If so, go back one step, delete code, and try a simpler implementation. Each new test should turn red, not green, until you explicitly write enough code to make it green. 
+* If you find that a test is redundant, delete it. 
+* If you need to add more tests, add them, following the TDD cycle:
+* Given that the implementation is minimal to make each test pass, you may encounter that the production code is not complete, even if all tests are passing. If the code is missing a more general case, please add more tests to reveal the defect or the incompletion and make it pass, following the TDD flow. Notice that, rather than adding new tests, you may want to change an existing test with the exact case that is missing. The name of the tests will tell you whether you need more tests or whether you may change existing tests. 
 * You may commit your changes after each green test to track your progress.  
+
 
 ## Bonus
 
