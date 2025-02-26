@@ -3,7 +3,7 @@ import { describe, it, expect} from "vitest";
 //import { GameError, GameResult, Guess, Hangman } from "./Hangman";
 
 
-describe("Hangmang machine", () => {
+describe("Hangman machine", () => {
 
     function startGame(secretWord: string, trials: number) {
         return Hangman.startGame({secretWord, trials})
