@@ -1,6 +1,6 @@
 
 import { describe, it, expect} from "vitest";
-import { GameError, GameResult, Guess, Hangmang, GameError as Misconfiguration } from "./Hangman";
+//import { GameError, GameResult, Guess, Hangmang } from "./Hangman";
 
 
 describe("Hangmang machine", () => {
@@ -62,13 +62,13 @@ describe("Hangmang machine", () => {
         let game = startGame("cat", -7)
         expect(game.isOver()).toBe(true)
         expect(game.isMisconfigured()).toBe(true)
-        expect(game.problem()).toBe(Misconfiguration.TrialsMustBePositive)
+        expect(game.problem()).toBe(GameError.TrialsMustBePositive)
         expect(game.revealedSecret()).toEqual("___")
         expect(game.availableTrials()).toEqual(0)
 
         game = startGame("", 15)
         expect(game.isOver()).toBe(true)
-        expect(game.problem()).toBe(Misconfiguration.SecretWordMustHaveAtLeastOneLetter)
+        expect(game.problem()).toBe(GameError.SecretWordMustHaveAtLeastOneLetter)
     })
 
     it.skip("does not alter a game that is already over", () => {
