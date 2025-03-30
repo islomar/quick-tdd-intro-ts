@@ -1,6 +1,6 @@
 
 import { describe, it, expect} from "vitest";
-import {Hangman, Guess, GameResult} from "./Hangman.ts";
+import {Hangman, Guess, GameResult, GameError} from "./Hangman.ts";
 //import { GameError, GameResult, Guess, Hangman } from "./Hangman";
 
 
@@ -74,7 +74,7 @@ describe("Hangman machine", () => {
         expect(game.revealedSecret()).toEqual("_a_")
     })
 
-    it.skip("can't play a game with wrong arguments", () => {
+    it ("can't play a game with wrong arguments", () => {
         let game = startGame("cat", -7)
         expect(game.isOver()).toBe(true)
         expect(game.isMisconfigured()).toBe(true)

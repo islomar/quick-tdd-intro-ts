@@ -6,7 +6,7 @@ export class Game {
     constructor(config: { secretWord: string, trials: number }) {
         this.secretWord = config.secretWord
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
-        this.remainingTrials = config.trials
+        this.remainingTrials = config.trials < 0 ? 0 : config.trials;
     }
 
     tryTo(letter: string) {
@@ -42,6 +42,22 @@ export class Game {
             .map(letter => this.remainingLettersToGuess.includes(letter) ? "_" : letter)
             .join("");
     }
+
+    isMisconfigured(): boolean {
+        return true;
+    }
+
+    problem() {
+        if (this.secretWord === "") {
+            return GameError.SecretWordMustHaveAtLeastOneLetter;
+        }
+        return GameError.TrialsMustBePositive;
+    }
+}
+
+export enum GameError {
+    TrialsMustBePositive,
+    SecretWordMustHaveAtLeastOneLetter,
 }
 
 export enum GameResult {
