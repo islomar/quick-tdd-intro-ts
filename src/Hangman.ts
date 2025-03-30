@@ -79,7 +79,7 @@ export class Game {
     }
 
     isMisconfigured(): boolean {
-        return true; //FIXME: no test is checking this being false
+        return this.gameError !== null;
     }
 
     problem() {

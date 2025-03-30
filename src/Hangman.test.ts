@@ -1,4 +1,3 @@
-
 import { describe, it, expect} from "vitest";
 import {Hangman, Guess, GameResult, GameError} from "./Hangman";
 
@@ -124,5 +123,11 @@ describe("Hangman machine", () => {
 
         expect(game.revealedSecret()).toEqual("_a_")
         expect(game.availableTrials()).toEqual(4)
+    })
+
+    it("is not misconfigured when there are no configuration errors", () => {
+        const game = startGame("cat", 5)
+
+        expect(game.isMisconfigured()).toBe(false)
     })
 })
