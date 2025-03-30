@@ -36,14 +36,11 @@ export class Game {
         return this.remainingTrials;
     }
 
-    revealedSecret() {
-        return this.secretWord.split("").map(letter => {
-            if (this.remainingLettersToGuess.includes(letter)) {
-                return "_"
-            } else {
-                return letter
-            }
-        }).join("");
+    revealedSecret(): string {
+        return this.secretWord
+            .split("")
+            .map(letter => this.remainingLettersToGuess.includes(letter) ? "_" : letter)
+            .join("");
     }
 }
 
