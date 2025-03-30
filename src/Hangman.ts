@@ -10,9 +10,12 @@ export class Game {
         this.secretWord = config.secretWord
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
         this.remainingTrials = config.trials < 0 ? 0 : config.trials;
-        // FIXME: we could create a VO, e.g. HangmanConfig, and do this validation there
+        // FIXME: we could create a VO, e.g. HangmanConfig, and do these validations there
         if (config.trials < 0) {
             this.gameError = GameError.TrialsMustBePositive;
+        }
+        if (this.secretWord === "") {
+            this.gameError = GameError.SecretWordMustHaveAtLeastOneLetter;
         }
     }
 
@@ -61,9 +64,6 @@ export class Game {
     }
 
     problem() {
-        if (this.secretWord === "") {
-            return GameError.SecretWordMustHaveAtLeastOneLetter;
-        }
         //FIXME: what if there are no problems?
         //FIXME: what if several problems happen at the same time?
         return this.gameError;
