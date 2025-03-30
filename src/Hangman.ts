@@ -1,22 +1,41 @@
 import {Either, left, right} from "./Either.ts";
 
+class HangmanConfig {
+    private constructor(
+        public readonly secretWord: string,
+        public readonly trials: number,
+        public readonly error: Nullable<GameError>
+    ) {}
+
+    static create(config: { secretWord: string, trials: number }): HangmanConfig {
+        let error: Nullable<GameError> = null;
+
+        if (config.trials < 0) {
+            error = GameError.TrialsMustBePositive;
+        }
+        if (config.secretWord === "") {
+            error = GameError.SecretWordMustHaveAtLeastOneLetter;
+        }
+
+        return new HangmanConfig(
+            config.secretWord,
+            config.trials < 0 ? 0 : config.trials,
+            error
+        );
+    }
+}
+
 export class Game {
     private readonly secretWord: string;
     private remainingTrials: number;
     private remainingLettersToGuess: string;
     private gameError: Nullable<GameError> = null;
 
-    constructor(config: { secretWord: string, trials: number }) {
-        this.secretWord = config.secretWord
+    constructor(config: HangmanConfig) {
+        this.secretWord = config.secretWord;
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
-        this.remainingTrials = config.trials < 0 ? 0 : config.trials;
-        // FIXME: we could create a VO, e.g. HangmanConfig, and do these validations there
-        if (config.trials < 0) {
-            this.gameError = GameError.TrialsMustBePositive;
-        }
-        if (this.secretWord === "") {
-            this.gameError = GameError.SecretWordMustHaveAtLeastOneLetter;
-        }
+        this.remainingTrials = config.trials;
+        this.gameError = config.error;
     }
 
     tryTo(guessResult: GuessResult) {
@@ -103,7 +122,7 @@ export class Hangman {
     // This class is not used in the tests, just for semantic purposes (returning a Game object)
     // and for keeping the original structure of the code
     static startGame(param: { secretWord: string; trials: number }): Game {
-        return new Game({secretWord: param.secretWord, trials: param.trials});
+        return new Game(HangmanConfig.create(param));
     }
 }
 
