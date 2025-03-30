@@ -70,7 +70,7 @@ export class Game {
         return this.gameError;
     }
 
-    private isCharacterALetter(char) {
+    private isCharacterALetter(char: string) {
         return (/[a-zA-Z]/).test(char)
     }
 }
