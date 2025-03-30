@@ -4,7 +4,7 @@ export class Game {
     private readonly secretWord: string;
     private remainingTrials: number;
     private remainingLettersToGuess: string;
-    private gameError: GameError;
+    private gameError: Nullable<GameError> = null;
 
     constructor(config: { secretWord: string, trials: number }) {
         this.secretWord = config.secretWord
@@ -84,6 +84,8 @@ export enum GameResult {
 }
 
 type GuessResult = Either<GameError, string>;
+
+type Nullable<T> = T | null;
 
 export class Guess {
     static letter(character: string): GuessResult {
