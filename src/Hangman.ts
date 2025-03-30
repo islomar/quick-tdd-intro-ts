@@ -44,13 +44,15 @@ export class Game {
     }
 
     isMisconfigured(): boolean {
-        return true;
+        return true; //FIXME: no test is checking this being false
     }
 
     problem() {
         if (this.secretWord === "") {
             return GameError.SecretWordMustHaveAtLeastOneLetter;
         }
+        //FIXME: what if there are no problems?
+        //FIXME: what if several problems happen at the same time?
         return GameError.TrialsMustBePositive;
     }
 }
