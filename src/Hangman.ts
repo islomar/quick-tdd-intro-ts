@@ -18,6 +18,10 @@ export class Game {
             this.gameError = GameError.MultipleLettersNotAllowed;
             return this;
         }
+        if (!this.isCharacterALetter(letter)) {
+            this.gameError = GameError.InvalidCharacter;
+            return this;
+        }
         if (this.remainingTrials > 0) {
             this.remainingTrials--;
         }
@@ -65,12 +69,17 @@ export class Game {
         //FIXME: what if several problems happen at the same time?
         return this.gameError;
     }
+
+    private isCharacterALetter(char) {
+        return (/[a-zA-Z]/).test(char)
+    }
 }
 
 export enum GameError {
     TrialsMustBePositive,
     SecretWordMustHaveAtLeastOneLetter,
     MultipleLettersNotAllowed,
+    InvalidCharacter,
 }
 
 export enum GameResult {

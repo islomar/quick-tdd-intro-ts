@@ -106,9 +106,10 @@ describe("Hangman machine", () => {
         expect(game.availableTrials()).toEqual(5)
     })
 
-    it.skip("does not allow for symbols or numbers, just letters a to z", () => {
+    it("does not allow for symbols or numbers, just letters a to z", () => {
         let game = startGame("cat", 5)
         game = game.tryTo(Guess.letter('1'))
+
         expect(game.revealedSecret()).toEqual("___")
         expect(game.problem()).toBe(GameError.InvalidCharacter)
         expect(game.availableTrials()).toEqual(5)
