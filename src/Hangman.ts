@@ -18,13 +18,13 @@ export class Game {
 
     tryTo(guessResult: GuessResult) {
         if (guessResult.isLeft()) {
-            this.gameError = <GameError>guessResult.value;
+            this.gameError = guessResult.value;
             return this;
         }
         if (this.remainingTrials > 0) {
             this.remainingTrials--;
         }
-        this.remainingLettersToGuess = this.remainingLettersToGuess.replace(<string>guessResult.value as string, "");
+        this.remainingLettersToGuess = this.remainingLettersToGuess.replace(guessResult.value, "");
         return this;
     }
 
