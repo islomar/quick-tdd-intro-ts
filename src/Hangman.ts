@@ -3,7 +3,7 @@ export class Game {
     private remainingTrials: number;
     private remainingLettersToGuess: string;
 
-    constructor(config: {secretWord: string, trials: number }) {
+    constructor(config: { secretWord: string, trials: number }) {
         this.secretWord = config.secretWord
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
         this.remainingTrials = config.trials
@@ -18,6 +18,14 @@ export class Game {
     isOver(): boolean {
         return this.remainingTrials <= 0 || this.remainingLettersToGuess.length === 0;
     }
+
+    result(): GameResult {
+        return GameResult.PlayerWins;
+    }
+}
+
+export enum GameResult {
+    PlayerWins
 }
 
 export class Guess {
@@ -29,6 +37,6 @@ export class Guess {
 export class Hangman {
 
     static startGame(param: { secretWord: string; trials: number }): Game {
-        return new Game({secretWord: param.secretWord, trials: param.trials });
+        return new Game({secretWord: param.secretWord, trials: param.trials});
     }
 }
