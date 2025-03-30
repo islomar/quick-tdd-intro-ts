@@ -20,15 +20,18 @@ export class Game {
     }
 
     result(): GameResult {
-        return this.remainingLettersToGuess.length === 0 ?
-            GameResult.PlayerWins :
-            GameResult.PlayerLoses;
+        if (this.remainingLettersToGuess.length === 0)
+            return GameResult.PlayerWins
+        else if (this.remainingTrials <= 0)
+            return GameResult.PlayerLoses
+        return GameResult.Ongoing
     }
 }
 
 export enum GameResult {
     PlayerWins,
     PlayerLoses,
+    Ongoing,
 }
 
 export class Guess {

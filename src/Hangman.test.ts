@@ -50,9 +50,11 @@ describe("Hangman machine", () => {
         expect(game.result()).toEqual(GameResult.PlayerLoses)   
     })
 
-    it.skip("knows that the game is ongoing", () => {
+    it("knows that the game is ongoing", () => {
         let game = startGame("p", 5)
+
         game = game.tryTo(Guess.letter('a'))
+
         expect(game.result()).toEqual(GameResult.Ongoing)
     })
 
