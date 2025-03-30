@@ -8,6 +8,7 @@ export class Game {
         this.secretWord = config.secretWord
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
         this.remainingTrials = config.trials < 0 ? 0 : config.trials;
+        // FIXME: we could create a VO, e.g. HangmanConfig, and do this validation there
         if (config.trials < 0) {
             this.gameError = GameError.TrialsMustBePositive;
         }
@@ -89,13 +90,16 @@ export enum GameResult {
 }
 
 export class Guess {
+    // FIXME: smell, this method does nothing.
+    // We should move here the validation of the character (not number, only one letter, etc)
     static letter(character: string) {
         return character
     }
 }
 
 export class Hangman {
-
+    // This class is not used in the tests, just for semantic purposes (returning a Game object)
+    // and for keeping the original structure of the code
     static startGame(param: { secretWord: string; trials: number }): Game {
         return new Game({secretWord: param.secretWord, trials: param.trials});
     }

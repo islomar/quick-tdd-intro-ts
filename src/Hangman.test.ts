@@ -1,7 +1,6 @@
 
 import { describe, it, expect} from "vitest";
-import {Hangman, Guess, GameResult, GameError} from "./Hangman.ts";
-//import { GameError, GameResult, Guess, Hangman } from "./Hangman";
+import {Hangman, Guess, GameResult, GameError} from "./Hangman";
 
 
 describe("Hangman machine", () => {
