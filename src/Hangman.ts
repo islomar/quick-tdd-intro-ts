@@ -10,7 +10,7 @@ class HangmanConfig {
     static createFrom(config: { secretWord: string, trials: number }): HangmanConfig {
         let error: Nullable<GameError> = null;
 
-        if (config.trials < 0) {
+        if (config.trials <= 0) {
             error = GameError.TrialsMustBePositive;
         }
         if (config.secretWord === "") {
@@ -19,7 +19,7 @@ class HangmanConfig {
 
         return new HangmanConfig(
             config.secretWord,
-            config.trials < 0 ? 0 : config.trials,
+            config.trials <= 0 ? 0 : config.trials,
             error
         );
     }

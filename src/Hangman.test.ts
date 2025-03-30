@@ -130,4 +130,14 @@ describe("Hangman machine", () => {
 
         expect(game.isMisconfigured()).toBe(false)
     })
+
+    it("treats zero trials as invalid configuration", () => {
+        const game = startGame("cat", 0)
+        
+        expect(game.isOver()).toBe(true)
+        expect(game.isMisconfigured()).toBe(true)
+        expect(game.problem()).toBe(GameError.TrialsMustBePositive)
+        expect(game.revealedSecret()).toEqual("___")
+        expect(game.availableTrials()).toEqual(0)
+    })
 })
