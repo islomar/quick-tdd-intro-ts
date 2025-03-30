@@ -66,9 +66,10 @@ describe("Hangman machine", () => {
         expect(game.availableTrials()).toEqual(4)
     })
 
-    it.skip("reveals only the part of the secret that has been guessed", () => {
+    it("reveals only the part of the secret that has been guessed", () => {
         let game = startGame("cat", 5)
         expect(game.revealedSecret()).toEqual("___")
+
         game = game.tryTo(Guess.letter('a'))
         expect(game.revealedSecret()).toEqual("_a_")
     })

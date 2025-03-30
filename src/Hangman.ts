@@ -35,6 +35,16 @@ export class Game {
     availableTrials() {
         return this.remainingTrials;
     }
+
+    revealedSecret() {
+        return this.secretWord.split("").map(letter => {
+            if (this.remainingLettersToGuess.includes(letter)) {
+                return "_"
+            } else {
+                return letter
+            }
+        }).join("");
+    }
 }
 
 export enum GameResult {
