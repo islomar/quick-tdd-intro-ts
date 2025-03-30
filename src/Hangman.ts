@@ -20,11 +20,16 @@ export class Game {
     }
 
     result(): GameResult {
-        if (this.remainingLettersToGuess.length === 0)
-            return GameResult.PlayerWins
-        else if (this.remainingTrials <= 0)
-            return GameResult.PlayerLoses
-        return GameResult.Ongoing
+        const hasWon = this.remainingLettersToGuess.length === 0;
+        const hasLost = this.remainingTrials <= 0 && !hasWon;
+
+        if (hasWon) {
+            return GameResult.PlayerWins;
+        }
+        if (hasLost) {
+            return GameResult.PlayerLoses;
+        }
+        return GameResult.Ongoing;
     }
 }
 
