@@ -1,3 +1,5 @@
+import {Either, left, right} from "./Either.ts";
+
 export class Game {
     private readonly secretWord: string;
     private remainingTrials: number;
@@ -14,19 +16,15 @@ export class Game {
         }
     }
 
-    tryTo(letter: string) {
-        if (letter.length > 1) {
-            this.gameError = GameError.MultipleLettersNotAllowed;
-            return this;
-        }
-        if (!this.isCharacterALetter(letter)) {
-            this.gameError = GameError.InvalidCharacter;
+    tryTo(guessResult: GuessResult) {
+        if (guessResult.isLeft()) {
+            this.gameError = <GameError>guessResult.value;
             return this;
         }
         if (this.remainingTrials > 0) {
             this.remainingTrials--;
         }
-        this.remainingLettersToGuess = this.remainingLettersToGuess.replace(letter, "");
+        this.remainingLettersToGuess = this.remainingLettersToGuess.replace(<string>guessResult.value as string, "");
         return this;
     }
 
@@ -70,10 +68,6 @@ export class Game {
         //FIXME: what if several problems happen at the same time?
         return this.gameError;
     }
-
-    private isCharacterALetter(char: string) {
-        return (/[a-zA-Z]/).test(char)
-    }
 }
 
 export enum GameError {
@@ -89,11 +83,17 @@ export enum GameResult {
     Ongoing,
 }
 
+type GuessResult = Either<GameError, string>;
+
 export class Guess {
-    // FIXME: smell, this method does nothing.
-    // We should move here the validation of the character (not number, only one letter, etc)
-    static letter(character: string) {
-        return character
+    static letter(character: string): GuessResult {
+        if (character.length > 1) {
+            return left(GameError.MultipleLettersNotAllowed);
+        }
+        if (!isCharacterALetter(character)) {
+            return left(GameError.InvalidCharacter);
+        }
+        return right(character)
     }
 }
 
@@ -103,4 +103,8 @@ export class Hangman {
     static startGame(param: { secretWord: string; trials: number }): Game {
         return new Game({secretWord: param.secretWord, trials: param.trials});
     }
+}
+
+function isCharacterALetter(char: string): boolean {
+    return (/[a-zA-Z]/).test(char)
 }

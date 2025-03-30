@@ -12,6 +12,9 @@ describe("Hangman machine", () => {
     it("finishes the game when all trials are consumed", () => {
         let game = startGame("p", 1)
 
+        // TODO: why does this return a Game?
+        // Looks like the Game object is immutable,
+        // so the game variable is not being updated
         game = game.tryTo(Guess.letter('a'))
 
         expect(game.isOver()).toBe(true)
