@@ -92,14 +92,15 @@ describe("Hangman machine", () => {
         game = game.tryTo(Guess.letter('a'))
         game = game.tryTo(Guess.letter('b'))
         game = game.tryTo(Guess.letter('c'))
-        
+
         expect(game.isOver()).toBe(true)
         expect(game.availableTrials()).toEqual(0)
     })
 
-    it.skip("does not allow for words or multiple letters when guessing", () => {
+    it ("does not allow for words or multiple letters when guessing", () => {
         let game = startGame("cat", 5)
         game = game.tryTo(Guess.letter('ca'))
+
         expect(game.revealedSecret()).toEqual("___")
         expect(game.problem()).toBe(GameError.MultipleLettersNotAllowed)
         expect(game.availableTrials()).toEqual(5)

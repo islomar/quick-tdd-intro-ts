@@ -2,14 +2,22 @@ export class Game {
     private readonly secretWord: string;
     private remainingTrials: number;
     private remainingLettersToGuess: string;
+    private gameError: GameError;
 
     constructor(config: { secretWord: string, trials: number }) {
         this.secretWord = config.secretWord
         this.remainingLettersToGuess = [...new Set(this.secretWord)].toString();
         this.remainingTrials = config.trials < 0 ? 0 : config.trials;
+        if (config.trials < 0) {
+            this.gameError = GameError.TrialsMustBePositive;
+        }
     }
 
     tryTo(letter: string) {
+        if (letter.length > 1) {
+            this.gameError = GameError.MultipleLettersNotAllowed;
+            return this;
+        }
         if (this.remainingTrials > 0) {
             this.remainingTrials--;
         }
@@ -55,13 +63,14 @@ export class Game {
         }
         //FIXME: what if there are no problems?
         //FIXME: what if several problems happen at the same time?
-        return GameError.TrialsMustBePositive;
+        return this.gameError;
     }
 }
 
 export enum GameError {
     TrialsMustBePositive,
     SecretWordMustHaveAtLeastOneLetter,
+    MultipleLettersNotAllowed,
 }
 
 export enum GameResult {
