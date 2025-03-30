@@ -31,6 +31,10 @@ export class Game {
         }
         return GameResult.Ongoing;
     }
+
+    availableTrials() {
+        return this.remainingTrials;
+    }
 }
 
 export enum GameResult {

@@ -58,9 +58,11 @@ describe("Hangman machine", () => {
         expect(game.result()).toEqual(GameResult.Ongoing)
     })
 
-    it.skip("counts the number of trials available", () => {
+    it("counts the number of trials available", () => {
         let game = startGame("p", 5)
+
         game = game.tryTo(Guess.letter('a'))
+
         expect(game.availableTrials()).toEqual(4)
     })
 
