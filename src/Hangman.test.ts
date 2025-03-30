@@ -1,5 +1,6 @@
 
 import { describe, it, expect} from "vitest";
+import {Hangman, Guess} from "./Hangman.ts";
 //import { GameError, GameResult, Guess, Hangman } from "./Hangman";
 
 
@@ -9,7 +10,7 @@ describe("Hangman machine", () => {
         return Hangman.startGame({secretWord, trials})
     }
 
-    it.skip("finishes the game when all trials are consumed", () => {
+    it("finishes the game when all trials are consumed", () => {
         let game = startGame("p", 1)
         game = game.tryTo(Guess.letter('a'))
         expect(game.isOver()).toBe(true)
