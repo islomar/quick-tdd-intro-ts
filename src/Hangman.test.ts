@@ -115,10 +115,11 @@ describe("Hangman machine", () => {
         expect(game.availableTrials()).toEqual(5)
     })
 
-    it.skip("allows for the game to continue after an invalid trial", () => {
+    it("allows for the game to continue after an invalid trial", () => {
         let game = startGame("cat", 5)
         game = game.tryTo(Guess.letter('1'))
         game = game.tryTo(Guess.letter('a'))
+
         expect(game.revealedSecret()).toEqual("_a_")
         expect(game.availableTrials()).toEqual(4)
     })
