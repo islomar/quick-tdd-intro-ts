@@ -22,7 +22,7 @@ describe("Hangman machine", () => {
         expect(game.isOver()).toBe(false)
     })
 
-    it.skip("finishes the game when the player guesses the secret word", () => {
+    it("finishes the game when the player guesses the secret word", () => {
         let game = startGame("p", 5)
         game = game.tryTo(Guess.letter('p'))
         expect(game.isOver()).toBe(true)
