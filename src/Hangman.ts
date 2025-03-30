@@ -7,7 +7,7 @@ class HangmanConfig {
         public readonly error: Nullable<GameError>
     ) {}
 
-    static create(config: { secretWord: string, trials: number }): HangmanConfig {
+    static createFrom(config: { secretWord: string, trials: number }): HangmanConfig {
         let error: Nullable<GameError> = null;
 
         if (config.trials < 0) {
@@ -67,7 +67,7 @@ export class Game {
         return GameResult.Ongoing;
     }
 
-    availableTrials() {
+    availableTrials(): number {
         return this.remainingTrials;
     }
 
@@ -122,7 +122,7 @@ export class Hangman {
     // This class is not used in the tests, just for semantic purposes (returning a Game object)
     // and for keeping the original structure of the code
     static startGame(param: { secretWord: string; trials: number }): Game {
-        return new Game(HangmanConfig.create(param));
+        return new Game(HangmanConfig.createFrom(param));
     }
 }
 
