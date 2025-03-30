@@ -10,7 +10,9 @@ export class Game {
     }
 
     tryTo(letter: string) {
-        this.remainingTrials--
+        if (this.remainingTrials > 0) {
+            this.remainingTrials--;
+        }
         this.remainingLettersToGuess = this.remainingLettersToGuess.replace(letter, "");
         return this;
     }

@@ -87,11 +87,12 @@ describe("Hangman machine", () => {
         expect(game.problem()).toBe(GameError.SecretWordMustHaveAtLeastOneLetter)
     })
 
-    it.skip("does not alter a game that is already over", () => {
+    it("does not alter a game that is already over", () => {
         let game = startGame("cat", 1)
         game = game.tryTo(Guess.letter('a'))
         game = game.tryTo(Guess.letter('b'))
         game = game.tryTo(Guess.letter('c'))
+        
         expect(game.isOver()).toBe(true)
         expect(game.availableTrials()).toEqual(0)
     })
