@@ -125,6 +125,10 @@ dist
 # IDE
 .idea
 
+## Stryker (mutation testing)
+reports
+.stryker-tmp
+
 # yarn v2
 .yarn/cache
 .yarn/unplugged

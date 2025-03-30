@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "packageManager": "npm",
+  "testRunner": "vitest",
+  "coverageAnalysis": "perTest",
+  "mutate": [
+    "src/Hangman.ts",
+    "src/Either.ts"
+  ],
+  "plugins": [
+    "@stryker-mutator/vitest-runner"
+  ],
+  "testRunnerNodeArgs": [
+    "--experimental-vm-modules"
+  ],
+  "concurrency": 1,
+  "inPlace": false,
+  "tempDirName": ".stryker-tmp"
+} 
