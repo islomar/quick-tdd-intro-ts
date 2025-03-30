@@ -12,19 +12,25 @@ describe("Hangman machine", () => {
 
     it("finishes the game when all trials are consumed", () => {
         let game = startGame("p", 1)
+
         game = game.tryTo(Guess.letter('a'))
+
         expect(game.isOver()).toBe(true)
     })
 
     it("keeps playing the game whilst there are trials left", () => {
         let game = startGame("p", 5)
+
         game = game.tryTo(Guess.letter('a'))
+
         expect(game.isOver()).toBe(false)
     })
 
     it("finishes the game when the player guesses the secret word", () => {
         let game = startGame("p", 5)
+
         game = game.tryTo(Guess.letter('p'))
+        
         expect(game.isOver()).toBe(true)
     })
 
