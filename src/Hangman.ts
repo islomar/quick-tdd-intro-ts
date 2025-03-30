@@ -12,6 +12,7 @@ class HangmanConfig {
 
         if (config.trials <= 0) {
             error = GameError.TrialsMustBePositive;
+            config.trials = 0;
         }
         if (config.secretWord === "") {
             error = GameError.SecretWordMustHaveAtLeastOneLetter;
@@ -19,7 +20,7 @@ class HangmanConfig {
 
         return new HangmanConfig(
             config.secretWord,
-            config.trials <= 0 ? 0 : config.trials,
+            config.trials,
             error
         );
     }
