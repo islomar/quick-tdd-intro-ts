@@ -16,7 +16,7 @@ describe("Hangman machine", () => {
         expect(game.isOver()).toBe(true)
     })
 
-    it.skip("keeps playing the game whilst there are trials left", () => {
+    it("keeps playing the game whilst there are trials left", () => {
         let game = startGame("p", 5)
         game = game.tryTo(Guess.letter('a'))
         expect(game.isOver()).toBe(false)
