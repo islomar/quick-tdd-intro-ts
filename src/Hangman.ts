@@ -20,12 +20,15 @@ export class Game {
     }
 
     result(): GameResult {
-        return GameResult.PlayerWins;
+        return this.remainingLettersToGuess.length === 0 ?
+            GameResult.PlayerWins :
+            GameResult.PlayerLoses;
     }
 }
 
 export enum GameResult {
-    PlayerWins
+    PlayerWins,
+    PlayerLoses,
 }
 
 export class Guess {
